@@ -1,5 +1,3 @@
-# main.py - Autism Detection Project
-
 import pandas as pd
 import numpy as np
 import seaborn as sns
@@ -10,18 +8,9 @@ from sklearn.preprocessing import LabelEncoder, StandardScaler
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score, classification_report
 from sklearn.utils import resample
-import os
 
-# ----------------------------
-# 0. Check current folder
-# ----------------------------
-print("Current working directory:", os.getcwd())
-print("Files here:", os.listdir())
-
-# ----------------------------
 # 1. Load dataset
-# ----------------------------
-DATA_PATH = "data/asd.csv"  # Ensure your CSV is in this folder
+DATA_PATH = "data/asd.csv"
 TARGET_COLUMN = "Diagnosed_ASD"
 
 df = pd.read_csv(DATA_PATH)
@@ -29,15 +18,12 @@ df = pd.read_csv(DATA_PATH)
 # Drop unnecessary columns
 df = df.drop(columns=["Child_ID", "Unnamed: 10"], errors='ignore')
 
-# Quick look
+# Testing the dataset
 print("First 5 rows:\n", df.head())
 print("\nDataset info:")
 print(df.info())
 
-# ----------------------------
 # 2. Preprocessing with rigor
-# ----------------------------
-
 # Step 2a: Handle missing values
 print("\nMissing values per column:\n", df.isnull().sum())
 
@@ -59,7 +45,6 @@ for col in numeric_cols:
         df[col].fillna(df[col].median(), inplace=True)
         print(f"Imputed {col} with median: {df[col].median()}")
 
-# ----------------------------
 # Keep a copy of categorical features for Chi-square before encoding
 df_cat_original = df[categorical_cols + [TARGET_COLUMN]].copy()
 
