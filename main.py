@@ -9,7 +9,7 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score, classification_report
 from sklearn.utils import resample
 
-# 1. Load dataset
+# Loading dataset
 DATA_PATH = "data/asd.csv"
 TARGET_COLUMN = "Diagnosed_ASD"
 
@@ -23,13 +23,12 @@ print("First 5 rows:\n", df.head())
 print("\nDataset info:")
 print(df.info())
 
-# 2. Preprocessing with rigor
-# Step 2a: Handle missing values
+# Preprocessing with rigor
+# Step 1: Handle missing values
 print("\nMissing values per column:\n", df.isnull().sum())
 
 # For simplicity, assume:
 # - MCAR: can use mode/median imputation
-# - MNAR: special handling if needed (not shown here)
 
 # Impute categorical features
 categorical_cols = ['Gender', 'Jaundice', 'Family_ASD_History', 'Language_Delay']
