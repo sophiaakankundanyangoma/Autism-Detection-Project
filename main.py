@@ -8,7 +8,7 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score, classification_report
 from sklearn.utils import resample
 
-# Loading dataset
+# 1. Loading dataset
 DATA_PATH = "data/asd.csv"
 TARGET_COLUMN = "Diagnosed_ASD"
 
@@ -22,12 +22,9 @@ print("First 5 rows:\n", df.head())
 print("\nDataset info:")
 print(df.info())
 
-# Preprocessing with rigor
+# 2. Preprocessing with rigor
 # Step 1: Handle missing values
 print("\nMissing values per column:\n", df.isnull().sum())
-
-# For simplicity, assume:
-# - MCAR: can use mode/median imputation
 
 # Impute categorical features
 categorical_cols = ['Gender', 'Jaundice', 'Family_ASD_History', 'Language_Delay']
@@ -46,12 +43,12 @@ for col in numeric_cols:
 # Keep a copy of categorical features for Chi-square before encoding
 df_cat_original = df[categorical_cols + [TARGET_COLUMN]].copy()
 
-# Step 2b: Encode categorical variables for modeling
+# Step 2: Encode categorical variables for modeling
 for col in categorical_cols:
     df[col] = LabelEncoder().fit_transform(df[col])
     print(f"Encoded {col} to numeric")
 
-# Step 2c: Check class balance
+# Step 3: Check class balance
 print("\nTarget value counts before resampling:")
 print(df[TARGET_COLUMN].value_counts())
 
@@ -71,7 +68,7 @@ print(df[TARGET_COLUMN].value_counts())
 X = df.drop(TARGET_COLUMN, axis=1)
 y = df[TARGET_COLUMN]
 
-# Step 2d: Scale numeric features
+# Step 4: Scale numeric features
 numeric_cols = X.select_dtypes(include=['int64', 'float64']).columns
 scaler = StandardScaler()
 X[numeric_cols] = scaler.fit_transform(X[numeric_cols])
@@ -81,7 +78,6 @@ X_train, X_test, y_train, y_test = train_test_split(
     X, y, test_size=0.2, random_state=42
 )
 # 3. Statistical EDA
-
 # T-tests for numeric features
 print("\nT-Test Results (Numeric Features Only):")
 for col in numeric_cols:
@@ -101,9 +97,7 @@ for col in categorical_cols:
     if p < 0.05:
         print(f"--> {col} is significantly associated with ASD")
 
-# ----------------------------
 # Visualizations
-# ----------------------------
 # Target distribution
 sns.countplot(data=df, x=TARGET_COLUMN)
 plt.title("Target Class Distribution")
@@ -115,9 +109,7 @@ for col in numeric_cols:
     plt.title(f"{col} by Target")
     plt.show()
 
-# ----------------------------
 # 4. Train Random Forest
-# ----------------------------
 model = RandomForestClassifier(random_state=42)
 model.fit(X_train, y_train)
 
