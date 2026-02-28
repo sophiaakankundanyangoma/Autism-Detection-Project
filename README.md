@@ -1,5 +1,5 @@
 # Autism Detection Project
-## Overview
+## Overview.
 This project aims to detect autism using a structured dataset from kaggle titled "Early Autism Screening Dataset for Toddlers by Mukesh Dilip"
 It includes;
 - Preprocessing: missing values, encoding, class imbalance
