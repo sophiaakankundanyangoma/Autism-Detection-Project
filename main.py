@@ -22,7 +22,7 @@ print("First 5 rows:\n", df.head())
 print("\nDataset info:")
 print(df.info())
 
-# 2. Preprocessing with rigor
+# 2. Preprocessing rigor
 # Step 1: Handle missing values
 print("\nMissing values per column:\n", df.isnull().sum())
 
@@ -100,7 +100,7 @@ for col in categorical_cols:
 # Visualizations
 # Target distribution
 sns.countplot(data=df, x=TARGET_COLUMN)
-plt.title("Target Class Distribution")
+plt.title("Target Class Distribution"),
 plt.show()
 
 # Numeric features by target
