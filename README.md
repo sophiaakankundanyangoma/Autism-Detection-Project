@@ -6,7 +6,6 @@ It includes;
 - Statistical EDA: T-tests, Chi-Square, visualizations
 ## Dataset
 The raw dataset is **not included** for privacy reasons.
-- Modeling: Random Forest
 ## Folder Structure
 - 'src/main.py' - main workflow
 ## Construct Mapping Table
